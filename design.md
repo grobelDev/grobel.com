@@ -29,7 +29,7 @@ Like Twitter, each POSTS will have the ability to COMMENT, RETWEET, LIKE, and SH
 
 - https://grobel.com/:user  
   Displays a user's chronological DAY PAGES with their associated POSTS in a feed format.
-- https://grobel.com/:user/time/:id  
+- https://grobel.com/:user/time/:timeId  
   Displays a specific DAY PAGE's POSTS.
 
 #### Status Pages
@@ -51,6 +51,12 @@ Trying to emulate Twitter routing.
   The front-end.
 - Chrome Extension  
    To store screenshots.
+- Authentication  
+  Firebase Authentication
+- Cloud Firestore  
+  To store user data.
+- Firebase Cloud Storage  
+  To store images.
 
 ---
 
