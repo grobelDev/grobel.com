@@ -1,8 +1,5 @@
 FROM node:latest
-
-
-
-WORKDIR /app
+# WORKDIR /app
 COPY ./package.json ./
 RUN npm install
 COPY . .
@@ -39,6 +36,7 @@ RUN npm i puppeteer \
 
 # Run everything after as non-privileged user.
 USER pptruser
+# ENTRYPOINT ["dumb-init", "--"]
 
 # CMD ["google-chrome-unstable"]
 
