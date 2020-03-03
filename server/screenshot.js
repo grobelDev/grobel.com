@@ -13,10 +13,13 @@ exports.screenshot = async (req, res) => {
     args: ['--no-sandbox']
   });
   const page = await browser.newPage();
-  await page.goto(url);
+  await page.setViewport({ width: 800, height: 800, deviceScaleFactor: 2 });
+  await page.goto(url, {
+    waitUntil: 'networkidle2'
+  });
   const imageBuffer = await page.screenshot();
   browser.close();
 
-  res.set('Content-Type', 'image/png');
+  res.set('Content-Type', 'image/png; charset=UTF-8');
   res.send(imageBuffer);
 };
