@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 var options = {
-  headless: false,
+  headless: true,
   args: ['--disable-extensions-except=./ublock', '--load-extension=./ublock']
 };
 
