@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 // const bodyParser = require('body-parser');
 // const markdown = require('./markdown.js');
+const { getExample, getHn } = require('./example.js');
 
 const app = express();
 
@@ -26,6 +27,21 @@ app.get('/', async (req, res) => {
     // let files = await markdown.getFiles(path);
     // console.log(files);
     res.status(200).send('hello world');
+  } catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+  }
+});
+
+app.get('/testing', async (req, res) => {
+  try {
+    // let path = 'articles';
+    // let files = await markdown.getFiles(path);
+    // console.log(files);
+    let exampleResult = await getExample();
+
+    res.set('Content-Type', 'image/jpeg; charset=UTF-8');
+    res.status(200).send(exampleResult);
   } catch (err) {
     console.log(err);
     res.status(400).send(err);
