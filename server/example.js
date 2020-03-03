@@ -9,7 +9,7 @@ async function getExample() {
   const browser = await puppeteer.launch(options);
   const page = await browser.newPage();
   await page.setViewport({ width: 800, height: 800, deviceScaleFactor: 2 });
-  await page.goto('https://coinmarketcap.com/');
+  await page.goto('https://coinmarketcap.com', { waitUntil: 'networkidle2' });
   let screenshot = await page.screenshot({ path: './screenshots/example.png' });
 
   await browser.close();
