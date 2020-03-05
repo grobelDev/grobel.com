@@ -4,11 +4,13 @@
   "description": "Takes screenshot of the given URL.",
   "author": "Steren Giannini",
   "scripts": {
+    "dev": "nodemon",
     "start": "node server.js"
   },
   "license": "Apache-2.0",
   "dependencies": {
     "express": "^4.16.4",
+    "nodemon": "^2.0.2",
     "puppeteer": "^1.10.0"
   }
 }
