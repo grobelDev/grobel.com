@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import Masonry from 'react-masonry-css';
+import _ from 'lodash';
 
 let testElements = [
   {
@@ -8,6 +9,13 @@ let testElements = [
       'https://cdn.discordapp.com/attachments/623723278879555594/686687261919805480/screenshot.png',
     title: 'Outset Island 10 Hours - Zelda The Wind Waker - YouTube',
     link: 'https://www.youtube.com/watch?v=geWqU2_-gCw'
+  },
+  {
+    src:
+      'https://cdn.discordapp.com/attachments/636565266356240394/686765534364303400/screenshot.png',
+    title:
+      'The Wind Waker HD - Episode 1 - Welcome to Outset Island! - YouTube',
+    link: 'https://www.youtube.com/watch?v=2TRE55puZoc'
   },
   {
     src:
@@ -48,39 +56,39 @@ let testElements = [
     title: 'Coronavirus COVID-19 (2019-nCoV)',
     link:
       'https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6'
-  },
-  {
-    src:
-      'https://cdn.discordapp.com/attachments/636565266356240394/684210280728625228/screenshot.png'
-  },
-  {
-    src:
-      'https://cdn.dribbble.com/users/758070/screenshots/10496626/media/d4d4835b70fff9c34f803eb6025dc679.png'
-  },
-  {
-    src:
-      'https://cdn.discordapp.com/attachments/636565266356240394/686679237150900329/screenshot.png'
-  },
-  {
-    src:
-      'https://cdn.discordapp.com/attachments/636565266356240394/686679196361031693/screenshot.png'
-  },
-  {
-    src:
-      'https://cdn.discordapp.com/attachments/636565266356240394/684210280728625228/screenshot.png'
-  },
-  {
-    src:
-      'https://cdn.discordapp.com/attachments/636565266356240394/686679160541937734/screenshot.png'
-  },
-  {
-    src:
-      'https://cdn.discordapp.com/attachments/636565266356240394/686679129906872331/screenshot.png'
-  },
-  {
-    src:
-      'https://cdn.discordapp.com/attachments/636565266356240394/686679020150325309/screenshot.png'
   }
+  //   {
+  //     src:
+  //       'https://cdn.discordapp.com/attachments/636565266356240394/684210280728625228/screenshot.png'
+  //   },
+  //   {
+  //     src:
+  //       'https://cdn.dribbble.com/users/758070/screenshots/10496626/media/d4d4835b70fff9c34f803eb6025dc679.png'
+  //   },
+  //   {
+  //     src:
+  //       'https://cdn.discordapp.com/attachments/636565266356240394/686679237150900329/screenshot.png'
+  //   },
+  //   {
+  //     src:
+  //       'https://cdn.discordapp.com/attachments/636565266356240394/686679196361031693/screenshot.png'
+  //   },
+  //   {
+  //     src:
+  //       'https://cdn.discordapp.com/attachments/636565266356240394/684210280728625228/screenshot.png'
+  //   },
+  //   {
+  //     src:
+  //       'https://cdn.discordapp.com/attachments/636565266356240394/686679160541937734/screenshot.png'
+  //   },
+  //   {
+  //     src:
+  //       'https://cdn.discordapp.com/attachments/636565266356240394/686679129906872331/screenshot.png'
+  //   },
+  //   {
+  //     src:
+  //       'https://cdn.discordapp.com/attachments/636565266356240394/686679020150325309/screenshot.png'
+  //   }
 ];
 
 const breakpointColumnsObj = {
@@ -91,6 +99,9 @@ const breakpointColumnsObj = {
 };
 
 export default function MasonryComponent() {
+  const [tagArray, setTagArray] = useState([]);
+  console.log('tagarray:', tagArray);
+
   return (
     <div className='bg-gray-200'>
       <div className='px-3'>
@@ -103,16 +114,33 @@ export default function MasonryComponent() {
             {/* {testElements.map(element => {
               return <img className='py-2' src={`${element.src}`}></img>;
             })} */}
-            {testElements.map(element => {
-              return (
-                <MasonryCard
-                  //   className='py-2'
-                  imgSource={element.src}
-                  title={element.title}
-                  link={element.link}
-                ></MasonryCard>
-              );
-            })}
+            {testElements
+              .filter(element => {
+                if (tagArray.length !== 0 && element.title) {
+                  //   console.log(element.title);
+                  //   if(element.title.split(' '))
+                  let titleArray = element.title.split(' ');
+                  //   let titleArray2 = titleArray.filter(element => )
+
+                  if (isSubset(tagArray, titleArray)) {
+                    return element;
+                  }
+                } else {
+                  return element;
+                }
+              })
+              .map(element => {
+                return (
+                  <MasonryCard
+                    //   className='py-2'
+                    imgSource={element.src}
+                    title={element.title}
+                    link={element.link}
+                    setTagArray={setTagArray}
+                    tagArray={tagArray}
+                  ></MasonryCard>
+                );
+              })}
           </Masonry>
         </TestDiv>
       </div>
@@ -120,10 +148,22 @@ export default function MasonryComponent() {
   );
 }
 
-function MasonryCard({ imgSource, title, link }) {
+function isSubset(source, target) {
+  return !_.difference(_.flatten(source), _.flatten(target)).length;
+}
+
+function filterMasonryCard(element) {
+  return (
+    <div>
+      <div>sdfsd</div>
+    </div>
+  );
+}
+
+function MasonryCard({ imgSource, title, link, setTagArray, tagArray }) {
   if (title) {
     let temporaryTags = title.split(' ');
-    console.log(temporaryTags);
+    // console.log(temporaryTags);
   }
 
   return (
@@ -169,8 +209,11 @@ function MasonryCard({ imgSource, title, link }) {
                 return (
                   <Fragment>
                     {filterTags(tag) ? (
-                      <span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
-                        {tag}
+                      <span
+                        className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'
+                        onClick={() => setTagArray([...tagArray, tag])}
+                      >
+                        {`${tag}`}
                       </span>
                     ) : null}
                   </Fragment>
@@ -196,7 +239,7 @@ function MasonryCard({ imgSource, title, link }) {
 }
 
 function filterTags(tag) {
-  let excludedTags = ['-', 'the', 'from', 'and'];
+  let excludedTags = ['-', 'the', 'from', 'and', 'to'];
   if (
     excludedTags.find(
       excludedTag => tag.toLowerCase() === excludedTag.toLowerCase()
