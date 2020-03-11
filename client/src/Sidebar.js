@@ -12,7 +12,8 @@ export default function SidebarMain() {
   return (
     <Fragment>
       <SidebarBrowser></SidebarBrowser>
-      <SidebarMini></SidebarMini>
+      {/* <SidebarMini></SidebarMini> */}
+      <SidebarMobile></SidebarMobile>
     </Fragment>
   );
 }
