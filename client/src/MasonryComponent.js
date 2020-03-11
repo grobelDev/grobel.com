@@ -74,7 +74,7 @@ const breakpointColumnsObj = {
 
 export default function MasonryComponent() {
   const [tagArray, setTagArray] = useState([]);
-  console.log('tagarray:', tagArray);
+  //   console.log('tagarray:', tagArray);
 
   return (
     <div className='bg-gray-200'>
@@ -184,7 +184,7 @@ function MasonryCard({ imgSource, title, link, setTagArray, tagArray }) {
                   <Fragment>
                     {filterTags(tag) ? (
                       <span
-                        className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'
+                        className='inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'
                         onClick={() => setTagArray([...tagArray, tag])}
                       >
                         {`${tag}`}
