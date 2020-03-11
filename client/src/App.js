@@ -22,7 +22,7 @@ import WireframesUserPostHistoryPage from './Wireframes.UserPostHistoryPage';
 export default function App() {
   return (
     <Fragment>
-      <Navbar></Navbar>
+      {/* <Navbar></Navbar> */}
       <Switch>
         {/* <Layout> */}
         <Route exact path='/'>
